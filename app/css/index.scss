@@ -1,0 +1,271 @@
+//样式初始化
+
+/*//设置字体平滑的*/
+body{
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing:grayscale;
+}
+body,html{
+
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  font-size: 16px;
+  font-family: "Helvetica Neue",Helvetica,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif !important;
+}
+input,
+select,
+textarea,
+button{
+  font-family:inherit;
+  font-size: inherit;
+}
+input,
+select,
+textarea,
+button,
+datalist,
+option{
+  outline:0;
+}
+h1,h2,h3,h4,h5,h6{
+  font-size: 100%;
+  font-weight: normal;
+}
+a{
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  text-decoration: none;
+}
+a,a:hover,a:link,a:visited,a:active{text-decoration:none!important;}
+html,
+body,
+article,
+section,
+header,
+footer,
+nav,
+div,
+dl,
+dt,
+dd,
+hr,
+ul,
+ol,
+li,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+pre,
+form,
+fieldset,
+input,
+textarea,
+p,
+th,
+td {
+  margin: 0;
+  padding: 0;
+  border: none;
+  outline: none;
+  text-indent: 0;
+  list-style: none;
+  -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+  box-sizing: border-box;
+}
+table{border-collapse:collapse;border-spacing:0;}
+i{
+  font-style: normal;
+}
+
+.content{
+  width: 980px;
+  margin: 0 auto;
+}
+.header {
+  background-color: #fff;
+  height: 67px;
+  width: 980px;
+  margin: 0 auto;
+}
+.headerTop {
+  position: relative;
+  width: 980px;
+  margin: 0 auto;
+  height: 97px;
+  padding-top: 14px;
+  color: #fff;
+  .header1 {
+    float: left;
+    img{
+      height: 42px;
+    }
+  }
+  .header2 {
+    padding-top: 10px;
+    float: right;
+    img{
+      height: 26px;
+    }
+  }
+}
+div{
+  font-size: 0;
+}
+.people-TOP{
+  width: 100%;
+  top: 67px;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  position: absolute;
+  min-width: 980px;
+  z-index: 1;
+  height: 705px;
+  .people{
+    margin: 0 auto;
+    height: 705px;
+    background: url("../images/kv.jpg");
+    background-repeat: no-repeat;
+    background-position: center top;
+  }
+}
+
+.productContent{
+  margin-top: 705px;
+  position: relative;
+  background: url("../images/bg.jpg") no-repeat;
+  background-size: cover;
+  .proBg{
+    position: relative;
+    top:0;
+    left:0;
+    min-width: 980px;
+    background: url("../images/bg.png");
+    background-repeat: no-repeat;
+    background-position: center top;
+  }
+  .container{
+    width: 980px;
+    margin: 0 auto;
+    .title{
+      height: 44px;
+      text-align: center;
+      img{
+        height:100%;
+      }
+    }
+    .newPro{
+      margin-top: 40px;
+      height: 290px;
+      position: relative;
+      //display: flex;
+      //justify-content: space-between;
+      //align-items: center;
+      .TS9180{
+        position: absolute;
+        top:50%;
+        left:-8px;
+        height: 294px;
+        margin-top: -147px;
+        vertical-align:middle;
+      }
+      .TS308{
+        position: absolute;
+        top:50%;
+        right:0px;
+        height: 280px;
+        margin-top: -140px;
+        vertical-align:middle;
+      }
+    }
+    .newPro:after{
+      display: flex;
+      content: '';
+      clear: both;
+      visibility: hidden;
+    }
+    .oldPro{
+     // display: flex;
+     // justify-content: space-around;
+     //align-items: flex-start;
+      margin-top: 42px;
+      //margin-bottom: 40px;
+      padding-bottom: 65px;
+      img{
+        height:312px;
+      }
+      .TS8180{
+        margin-left: 30px;
+      }
+      .TS5180{
+        margin-left: 88px;
+      }
+      .TS3180{
+        margin-left: 88px;
+      }
+    }
+  }
+}
+.buy{
+  height:275px;
+  width:100%;
+  background-color: #fff;
+  //display: flex;
+  //align-items: center;
+  //justify-content: center;
+  position: relative;
+  .buyContent{
+    height: 170px;
+    position: absolute;
+    top:50%;
+    margin-top: -85px;
+    width:100%;
+    text-align: center;
+  }
+  .title{
+    width: 980px;
+    text-align: center;
+    margin: 0 auto;
+    img{
+      height: 42px;
+    }
+  }
+  .buySite{
+    //height:275px;
+    //display: flex;
+    width: 682px;
+    //justify-content: space-around;
+    margin: 0 auto;
+    margin-top: 40px;
+    font-size: 0px;
+    a{
+      float: left;
+    }
+    .jd{
+      margin-left: 20px;
+    }
+    .search{
+      margin-left: 20px;
+    }
+  }
+  .buySite:after{
+    display: block;
+    content: '';
+    clear: both;
+    visibility: hidden;
+  }
+}
+.footer{
+  height:62px;
+  color: #fff;
+  background-color: #d7b48c;
+  text-align: center;
+  font-size: 14px;
+  line-height: 62px;
+}
