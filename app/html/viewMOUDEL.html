@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+    <input type="text" id="a" v-model="name"> name }}
+    <p id="b"> name }}</p>
+</div>
+
+<script>
+
+
+    function nodeToFragment(node, vm)
+        let flge = document.createDocumentFragment() //它可以包含多个子节点
+        //劫持到子节点，之后app里面没有任何子元素
+
+        let child;
+        //循环劫持所有的字节点node下面子节点，子节点被劫持后在打印父节点，被劫持的子节点消失
+        while (child = node.firstChild)
+//            所有的子节点每次都需要把下面的子节点进行循环
+            init(child, vm);
+            flge.append(child)
+        }
+        return flge;
+    }
+
+    //在从新添加在app中
+    //    document.getElementById('app').appendChild(dom)
+    //    console.log(document.getElementById('app'))
+
+    //数据初始化默认值
+    function init(node, vm)
+        //匹配正则
+        let reg = /\\(.*)\}\}/;
+        //判断节点类型1为元素节点 ，2属性节点，3代表元素或者属性中的文本内容
+        if (node.nodeType === 1)
+            let attr = node.attributes; //得到所有的属性以及属性值
+            //解析属性循环得出所有的属性,查找v-model属性
+            for (let i = 0; i < attr.length; i++)
+                //进行判断是否有v-model获取属性名
+                let name = attr[i].nodeName;
+                if (name == 'v-model')
+//                    console.log(attr[i].nodeValue);//获取该属性的属性值
+
+//                    node.value = vm.data[attr[i].nodeValue];
+                    var name1 = attr[i].nodeValue; //获取v-model的定义名字
+                    // vm[name1] 获取data中的属性为name的值
+                    //进行事件的监听给相应的data赋值进而触发该属性的set方法
+                    node.addEventListener('input', (e) =>
+                        vm[name1] = e.target.value;
+                    }); //e.target.value获取事件触发之后的input里面的value值
+                    node.value = vm[attr[i].nodeValue]; //把data的值赋值给该node
+                    //删除这个属性
+                    node.removeAttribute('v-model')
+                }
+            }
+        }
+        //判断节点类型为text类型
+        if (node.nodeType === 3)
+            //test()方法用于检测一个字符串是否匹配某个模式.
+            if (reg.test(node.nodeValue))
+                console.log(RegExp.$1);
+                let name = RegExp.$1; //匹配里面的结果，
+                name = name.trim();//除去字符串两端的空白
+//                node.nodeValue = vm.data[name] //将data的值赋值给该node元素
+//                node.nodeValue = vm[name] //将data的值赋值给该node元素
+                new Watcher(vm, node, name)  //为每个html初始化一次监听watcher
+            }
+        }
+    }
+
+    //进行监听
+    function Watcher(vm, node, name)
+        Dep.target = this;
+        this.name = name;
+        this.node = node;
+        this.vm = vm;
+        this.update();
+        console.log(this);
+        Dep.target = null;
+    }
+
+    Watcher.prototype =
+        //更新方法
+        update: function ()
+            this.get();
+            this.node.nodeValue = this.value;
+        },
+        get: function ()
+            this.value = this.vm[this.name];
+        }
+    };
+
+    //主题对象
+    function Dep()
+        this.subs = [];
+    }
+
+    Dep.prototype =
+        //添加观察者
+        addSub: function (sub)
+            this.subs.push(sub);
+        },
+        notify: function ()
+            this.subs.forEach((sub) =>
+                sub.update();
+            })
+        }
+    };
+
+    //进行最后的绑定
+    function vue(options)
+        this.data = options.data; // this指向vm实例化之后的
+        var id = options.element; //挂在的元素，即父组件
+        var data = this.data;
+        defint(data, this);
+
+        let dom = nodeToFragment(document.getElementById(id), this);
+        //最后把dom添加在这个父元素，即你挂载的id中
+        document.getElementById(id).appendChild(dom)
+    }
+
+    //进行双向绑定首先确定在输入的时候出发change事件
+    function change(obj, key, value)
+        //初始化
+        let dep = new Dep();
+        Object.defineProperty(obj, key,
+            get: function ()
+                //添加订阅者到主题对象
+                if (Dep.target)
+                    dep.addSub(Dep.target)
+                }
+                return value;
+            },
+            set: function (newValue)
+                //如果新的value跟旧的value全等则知己return，否则把新的赋值给旧的
+                if (newValue === value)
+                    return;
+                }
+                value = newValue;
+            }
+        })
+    }
+
+    function defint(obj, vm)
+        console.log(obj);
+        //获取对象可以的值生成一个数组
+        Object.keys(obj).map((v) =>
+            change(vm, v, obj[v])
+        })
+    }
+
+    //进行用
+    //    1，先进行实例化
+    var vm = new vue(
+        element: 'app',
+        data:
+            name: 'hello world'
+        }
+    });
+
+    //    console.log(vm)
+
+
+    function observer()
+        //观察者模式
+        //1定义一个发布者
+        var publish =
+            publish: function ()
+                dep.notify(name: "wang"}) //发布者调用所用的方法; 调用初始化之后的方法
+            }
+        }
+        //订阅者可是多个,定义三个订阅者即观察者
+        var subscriber1 =
+            update: (val) =>
+                console.log(val)
+            }
+        };
+        var subscriber2 =
+            update: (val) =>
+                console.log(val)
+            }
+        };
+        var subscriber3 =
+            update: (val) =>
+                console.log(val)
+            }
+        };
+
+        //主题对象
+        function Dep()
+            this.substitutes = [subscriber1, subscriber2, subscriber3]
+        }
+
+        Dep.prototype.notify = function (val)
+            this.substitutes.map((v, i) =>
+                v.update(val); //进行调用所有的订阅者里面的更新方法
+            })
+        };
+        //Dep进行初始化
+        var dep = new Dep();
+        publish.publish()
+
+        //点发布者更改参数的时候，多个订阅者会收到主题对象打过来的改变通知，然后进行改变
+    }
+
+
+    //get 与 set方法
+    let nameParent =
+        name: "wang",
+        //读取属性
+        get: function (name)
+            return name
+        },
+        //重置属性
+        set:function (newVal)
+            this.name = newVal;
+        }
+    };
+    console.log(nameParent.get(nameParent.name));//wang
+    nameParent.set('sheng');
+    console.log(nameParent.get(nameParent.name));//sheng
+
+
+    //Object.defineProperty(属性所在的对象，属性的名字，一个描述符对象)方法，通过这个方法
+    //创建的对象Writable，Enumerable，configurable，默认为false，其他方法创建的默认为true；
+    //为了可配置，必须在第一次调用Object.defineProperty()函数时就将默认的值修改为true。
+    let person = };
+    Object.defineProperty(person,'name', //name是属性值，必须加引号
+        Writable:false, //属性值不可修改为false，属性值可修改为true
+        Enumerable:true,//表示是否可被for-in循环出其属性
+        configurable:false,//表示是否可删除，false为不可删除，true为可删除
+        value:'我是王圣哲',
+    });
+    console.log(person.name); //我是王圣哲
+    //改变name属性的值
+    person.name = '哈哈哈';
+    console.log(person.name);//我是王圣哲
+
+    header:
+        Accept:'application/x-www-form-urlencoded',
+            Access-Control-Allow-Origin:'*',
+            Access-Control-Allow-Methods: 'POST, GET, OPTIONS, PUT, DELETE',
+            token: '**********'
+    }},
+</script>
+</body>
+</html>
