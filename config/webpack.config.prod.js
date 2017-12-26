@@ -20,7 +20,7 @@ module.exports = webpackMerge(webpackBase,{
         new webpack.optimize.CommonsChunkPlugin({ //提取出来的公共代码，当生成HTML文件的时候会引用这个文件
             // chunk 名为 commons
             name: "commons",
-            filename: "[name].bundle.js",
+            filename: "js/[name].bundle.js",
         }),
     ]
 });

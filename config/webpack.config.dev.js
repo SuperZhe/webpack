@@ -14,6 +14,19 @@ module.exports = webpackMerge(webpackBase,{
     devServer:{
         // 项目根目录
         contentBase:config.devServerOutputPath,
+        //进行代理服务
+        proxy:{
+            '/api':{
+                target:config.url ,//代理到地址
+                secure:false, //验证SSL证书
+                //重置url
+                // pathRewrite:['^/api',''], //删除路径
+                //将主机头的原点更改为目标URL
+                changeOrigin:true,
+                //设置请求头
+                headers:{}
+}
+        },
         // 错误、警告展示设置
         overlay:{
             errors:true,
